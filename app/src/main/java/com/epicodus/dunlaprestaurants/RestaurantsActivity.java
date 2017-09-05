@@ -3,6 +3,7 @@ package com.epicodus.dunlaprestaurants;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ import butterknife.ButterKnife;
 public class RestaurantsActivity extends AppCompatActivity {
     @Bind(R.id.locationTextView) TextView mLocationTextView;
     @Bind(R.id.listView) ListView mListView;
+
+    public static final String TAG = RestaurantsActivity.class.getSimpleName();
 
 
     private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro",

@@ -1,4 +1,4 @@
-package com.epicodus.dunlaprestaurants;
+package com.epicodus.dunlaprestaurants.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.epicodus.dunlaprestaurants.R;
+import com.epicodus.dunlaprestaurants.models.Restaurant;
+import com.epicodus.dunlaprestaurants.services.YelpService;
 
 import java.io.IOException;
 import java.util.ArrayList;

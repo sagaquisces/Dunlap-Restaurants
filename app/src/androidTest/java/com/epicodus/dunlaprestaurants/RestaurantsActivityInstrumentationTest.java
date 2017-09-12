@@ -7,6 +7,8 @@ package com.epicodus.dunlaprestaurants;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import com.epicodus.dunlaprestaurants.ui.RestaurantsActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

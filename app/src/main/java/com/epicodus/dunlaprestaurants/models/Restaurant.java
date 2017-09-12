@@ -1,4 +1,4 @@
-package com.epicodus.dunlaprestaurants;
+package com.epicodus.dunlaprestaurants.models;
 
 import java.util.ArrayList;
 

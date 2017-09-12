@@ -5,8 +5,9 @@ package com.epicodus.dunlaprestaurants;
  */
 
 import android.os.Build;
-import android.os.RemoteException;
 import android.widget.ListView;
+
+import com.epicodus.dunlaprestaurants.ui.RestaurantsActivity;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -2,6 +2,8 @@ package com.epicodus.dunlaprestaurants;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.epicodus.dunlaprestaurants.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

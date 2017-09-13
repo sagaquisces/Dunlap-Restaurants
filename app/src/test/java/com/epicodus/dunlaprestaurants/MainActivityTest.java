@@ -4,6 +4,9 @@ import android.os.Build;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.epicodus.dunlaprestaurants.ui.MainActivity;
+import com.epicodus.dunlaprestaurants.ui.RestaurantsActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

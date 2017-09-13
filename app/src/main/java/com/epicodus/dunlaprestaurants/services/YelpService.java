@@ -1,6 +1,9 @@
-package com.epicodus.dunlaprestaurants;
+package com.epicodus.dunlaprestaurants.services;
 
 import android.util.Log;
+
+import com.epicodus.dunlaprestaurants.Constants;
+import com.epicodus.dunlaprestaurants.models.Restaurant;
 
 import org.json.JSONArray;
 import org.json.JSONException;

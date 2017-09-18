@@ -1,13 +1,14 @@
 package com.epicodus.dunlaprestaurants.models;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
- * Created by michaeldunlap on 9/12/17.
+ * Created by michaeldunlap on 9/11/17.
  */
-
+@Parcel
 public class Restaurant {
-
     private String mName;
     private String mPhone;
     private String mWebsite;
@@ -18,17 +19,17 @@ public class Restaurant {
     private double mLongitude;
     private ArrayList<String> mCategories = new ArrayList<>();
 
-//    public Restaurant(String name, String phone, String website,
-//                      double rating, String imageUrl, ArrayList<String> address,
-//                      double latitude, double longitude, ArrayList<String> categories) {
+    public Restaurant() {}
 
-    public Restaurant(String name, String phone, String website, double rating, String imageUrl, ArrayList<String> address, double latitude, double longitude, ArrayList<String> categories) {
-
+    public Restaurant(String name, String phone, String website,
+                      double rating, String imageUrl, ArrayList<String> address,
+                      double latitude, double longitude, ArrayList<String> categories) {
         this.mName = name;
         this.mPhone = phone;
         this.mWebsite = website;
         this.mRating = rating;
-        this.mImageUrl = imageUrl;
+//        this.mImageUrl = imageUrl;
+        this.mImageUrl = getLargeImageUrl(imageUrl);
         this.mAddress = address;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
@@ -53,6 +54,11 @@ public class Restaurant {
 
     public String getImageUrl(){
         return mImageUrl;
+    }
+
+    public String getLargeImageUrl(String imageUrl) {
+        String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 6).concat("o.jpg");
+        return largeImageUrl;
     }
 
     public ArrayList<String> getAddress() {

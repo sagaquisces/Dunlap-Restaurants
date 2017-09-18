@@ -26,6 +26,7 @@
                 android:value="com.epicodus.dunlaprestaurants.ui.MainActivity"></meta-data>
         </activity>
         <activity android:name=".ui.RestaurantDetailActivity"></activity>
+        <activity android:name=".ui.SavedRestaurantListActivity"></activity>
     </application>
 
 </manifest>

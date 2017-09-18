@@ -25,16 +25,35 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class RestaurantListActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentAddress;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private RestaurantListAdapter mAdapter;
 
 
     public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
 
     public static final String TAG = RestaurantListActivity.class.getSimpleName();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restaurants);
+
+        ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        String location = intent.getStringExtra("location");
+
+        getRestaurants(location);
+
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getRestaurants(mRecentAddress);
+//        }
+    }
+
 
     private void getRestaurants(String location) {
         final YelpService yelpService = new YelpService();
@@ -45,7 +64,7 @@ public class RestaurantListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) {
                 mRestaurants = yelpService.processResults(response);
 
                 RestaurantListActivity.this.runOnUiThread(new Runnable() {
@@ -64,20 +83,4 @@ public class RestaurantListActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
-
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getRestaurants(mRecentAddress);
-        }
-    }
 }

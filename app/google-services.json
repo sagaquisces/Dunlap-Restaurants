@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "179015022441",
+    "firebase_url": "https://dunlaprestaurants-a4014.firebaseio.com",
+    "project_id": "dunlaprestaurants-a4014",
+    "storage_bucket": "dunlaprestaurants-a4014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179015022441:android:57f66e4e8c29ff19",
+        "android_client_info": {
+          "package_name": "com.epicodus.dunlaprestaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179015022441-cp0o6k151d8t81uo3kkh1s93gt38icn3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.dunlaprestaurants",
+            "certificate_hash": "5db38fd5e4a7839f459d512cada3c7c8c9512a0e"
+          }
+        },
+        {
+          "client_id": "179015022441-ds17jmofa6hql7utp5soej670e2tuaqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg-sDNmvZqZJYNtmrUqQ72wiBc8qeIWYA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179015022441-ds17jmofa6hql7utp5soej670e2tuaqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

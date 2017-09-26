@@ -21,52 +21,11 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class RestaurantListActivity extends AppCompatActivity {
-    public static final String TAG = RestaurantListActivity.class.getSimpleName();
-
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-    private RestaurantListAdapter mAdapter;
-
-    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
-
-        getRestaurants(location);
     }
 
-    private void getRestaurants(String location) {
-        final YelpService yelpService = new YelpService();
-
-        yelpService.findRestaurants(location, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-                mRestaurants = yelpService.processResults(response);
-
-                RestaurantListActivity.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(RestaurantListActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-                    }
-                });
-            }
-        });
-    }
 }

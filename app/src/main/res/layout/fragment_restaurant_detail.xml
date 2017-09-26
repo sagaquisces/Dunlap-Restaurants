@@ -1,141 +1,132 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context="com.epicodus.dunlaprestaurants.ui.RestaurantDetailFragment">
 
 
-    <ImageView
-        android:id="@+id/restaurantImageView"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/waffles"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#FFF"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantImageView" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:id="@+id/restaurantImageView"
+            android:src="@drawable/waffles"
+            android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/restaurantNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="Restaurant Name"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/view"
-        android:layout_marginStart="8dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp">
 
-    <TextView
-        android:id="@+id/ratingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/restaurantNameTextView"
-        android:text="4.5/5"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:layout_marginRight="16dp"
-        app:layout_constraintRight_toRightOf="@+id/view"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restaurant Name"
+                android:id="@+id/restaurantNameTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/cuisineTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/restaurantNameTextView"
-        android:text="Brunch, American"
-        android:textColor="@color/colorSecondaryText"
-        android:textStyle="italic"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantNameTextView"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/restaurantNameTextView" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5/5"
+                android:id="@+id/ratingTextView"
+                android:layout_alignTop="@+id/restaurantNameTextView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brunch, American"
+                android:id="@+id/cuisineTextView"
+                android:layout_below="@+id/restaurantNameTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorSecondaryText"
+                android:textStyle="italic" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/websiteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_exit_to_app_white_24dp"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:text="View Online"
-        android:textColor="@color/colorTextIcons"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/phoneTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_local_phone_white_24dp"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:text="(503) 223-1282"
-        android:textColor="@color/colorTextIcons"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/websiteTextView"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/websiteTextView" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/saveRestaurantButton"
+                android:paddingLeft="30dp"
+                android:paddingTop="20dp"
+                android:paddingRight="30dp">
 
-    <TextView
-        android:id="@+id/addressTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_map_white_24dp"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"
-        android:textColor="@color/colorTextIcons"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTextView"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/phoneTextView" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View on Yelp"
+                    android:id="@+id/websiteTextView"
+                    android:drawableLeft="@drawable/ic_exit_to_app_white_24dp"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(503) 223-1282"
+                    android:id="@+id/phoneTextView"
+                    android:drawableLeft="@drawable/ic_local_phone_white_24dp"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
 
-    <Button
-        android:id="@+id/saveRestaurantButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
-        android:text="Save Restaurant"
-        android:textColor="@color/colorTextIcons"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"
+                    android:drawableLeft="@drawable/ic_map_white_24dp"
+                    android:drawablePadding="4dp"
+                    android:id="@+id/addressTextView"
+                    android:textColor="@color/colorTextIcons"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"/>
 
+            </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Restaurant"
+                android:id="@+id/saveRestaurantButton"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorTextIcons"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

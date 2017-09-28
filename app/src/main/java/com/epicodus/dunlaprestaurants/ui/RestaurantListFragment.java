@@ -1,6 +1,7 @@
 package com.epicodus.dunlaprestaurants.ui;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import com.epicodus.dunlaprestaurants.R;
 import com.epicodus.dunlaprestaurants.adapters.RestaurantListAdapter;
 import com.epicodus.dunlaprestaurants.models.Restaurant;
 import com.epicodus.dunlaprestaurants.services.YelpService;
+import com.epicodus.dunlaprestaurants.utils.OnRestaurantSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class RestaurantListFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
+    private OnRestaurantSelectedListener mOnRestaurantSelectedListener;
 
     public RestaurantListFragment() {
         // Required empty public constructor
@@ -74,6 +77,16 @@ public class RestaurantListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnRestaurantSelectedListener = (OnRestaurantSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
+
     private void getRestaurants(String location) {
         final YelpService yelpService = new YelpService();
 
@@ -92,7 +105,7 @@ public class RestaurantListFragment extends Fragment {
 
                     @Override
                     public void run() {
-                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants);
+                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants, mOnRestaurantSelectedListener);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
                                 new LinearLayoutManager(getActivity());

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,17 @@ import com.epicodus.dunlaprestaurants.R;
 import com.epicodus.dunlaprestaurants.models.Restaurant;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,13 +46,15 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     private Restaurant mRestaurant;
     private ArrayList<Restaurant> mRestaurants;
     private int mPosition;
+    private String mSource;
 
-    public static RestaurantDetailFragment newInstance(ArrayList<Restaurant> restaurants, Integer position) {
+    public static RestaurantDetailFragment newInstance(ArrayList<Restaurant> restaurants, Integer position, String source) {
         RestaurantDetailFragment restaurantDetailFragment = new RestaurantDetailFragment();
         Bundle args = new Bundle();
 
         args.putParcelable(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(restaurants));
         args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        args.putString(Constants.KEY_SOURCE, source);
 
         restaurantDetailFragment.setArguments(args);
         return restaurantDetailFragment;
@@ -59,6 +66,8 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mRestaurants = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_RESTAURANTS));
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mRestaurant = mRestaurants.get(mPosition);
+        mSource = getArguments().getString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -83,7 +92,14 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
 
-        mSaveRestaurantButton.setOnClickListener(this);
+        Log.v("LOOK HERE", mSource);
+
+        if (mSource.equals(Constants.SOURCE_SAVED)) {
+            mSaveRestaurantButton.setVisibility(View.GONE);
+        } else {
+            // This line of code should already exist. Make sure it now resides in this conditional:
+            mSaveRestaurantButton.setOnClickListener(this);
+        }
 
         return view;
     }
@@ -110,17 +126,41 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         if (v == mSaveRestaurantButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference restaurantRef = FirebaseDatabase
+            final DatabaseReference restaurantRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
                     .child(uid);
+            restaurantRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                   boolean duplicate = false;
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        Map<String, Object> model = (Map<String, Object>) child.getValue();
+                        if(model.get("website").equals(String.valueOf(mRestaurant.getWebsite()))) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
 
-            DatabaseReference pushRef = restaurantRef.push();
-            String pushId = pushRef.getKey();
-            mRestaurant.setPushId(pushId);
-            pushRef.setValue(mRestaurant);
+                    if (duplicate) {
+                        Toast.makeText(getContext(), "Already Saved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        DatabaseReference pushRef = restaurantRef.push();
+                        String pushId = pushRef.getKey();
+                        mRestaurant.setPushId(pushId);
+                        pushRef.setValue(mRestaurant);
 
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         }
     }
 

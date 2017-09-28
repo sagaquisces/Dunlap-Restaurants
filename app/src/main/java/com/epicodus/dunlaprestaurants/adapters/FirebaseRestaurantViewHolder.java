@@ -4,6 +4,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import com.epicodus.dunlaprestaurants.R;
 import com.epicodus.dunlaprestaurants.models.Restaurant;
 import com.epicodus.dunlaprestaurants.utils.ItemTouchHelperViewHolder;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 
 /**
@@ -38,11 +41,15 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
         TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
-        Picasso.with(mContext)
-                .load(restaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(mRestaurantImageView);
+        if (TextUtils.isEmpty(restaurant.getImageUrl())) {
+            Picasso.with(mContext).cancelRequest(mRestaurantImageView);
+        } else {
+            Picasso.with(mContext)
+                    .load(restaurant.getImageUrl())
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
+                    .into(mRestaurantImageView);
+        }
 
         nameTextView.setText(restaurant.getName());
         categoryTextView.setText(restaurant.getCategories().get(0));

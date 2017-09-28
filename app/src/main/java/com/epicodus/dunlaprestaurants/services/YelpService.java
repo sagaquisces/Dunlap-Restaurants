@@ -81,11 +81,8 @@ public class YelpService {
                     JSONArray categoriesJSON = restaurantJSON.getJSONArray("categories");
 
                     for (int y = 0; y < categoriesJSON.length(); y++) {
-//                        categories.add(categoriesJSON.getJSONArray(y).get(0).toString()); version 2
                         categories.add(categoriesJSON.getJSONObject(y).get("title").toString());
                     }
-//                    Restaurant restaurant = new Restaurant(name, phone, website, rating,
-//                            imageUrl, address, latitude, longitude, categories);
                     Restaurant restaurant = new Restaurant(name, phone, website, rating, imageUrl, address, latitude, longitude, categories);
                     restaurants.add(restaurant);
                 }
